@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>A Blessing a Day – For Petru</title>
+  <meta name="description" content="A year of daily blessings for Petru, from Matt with love.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Blessings 🌸">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="theme-color" content="#3d1c0e">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="app-header" id="app-header">
+    <div class="header-bg"></div>
+    <div class="header-content">
+      <div class="header-top-row">
+        <button class="menu-btn" id="menu-btn" aria-label="View all days">☰</button>
+        <a class="home-btn" href="index.html" aria-label="Home" title="Back to home">🏠</a>
+        <div class="header-title-group">
+          <p class="header-sub">A Blessing a Day</p>
+          <h1 class="header-title">For Petru 🌸</h1>
+        </div>
+        <button class="today-btn" id="go-today-btn" aria-label="Go to today">Today</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- TODAY PILL -->
+  <div class="today-pill" id="today-pill">
+    <span class="today-dot"></span>
+    <span id="today-pill-text">Day 1</span>
+  </div>
+
+  <!-- MAIN CARD AREA -->
+  <main class="card-viewport" id="card-viewport">
+    <div class="card-track" id="card-track">
+      <!-- Cards injected by JS -->
+    </div>
+  </main>
+
+  <!-- NAV ARROWS -->
+  <div class="nav-arrows" id="nav-arrows">
+    <button class="nav-arrow" id="prev-btn" aria-label="Previous day">‹</button>
+    <div class="day-counter" id="day-counter">Day 1 of 365</div>
+    <button class="nav-arrow" id="next-btn" aria-label="Next day">›</button>
+  </div>
+
+  <!-- ALL-DAYS PANEL -->
+  <div class="panel-overlay" id="panel-overlay"></div>
+  <aside class="days-panel" id="days-panel">
+    <div class="panel-header">
+      <h2>All Blessings</h2>
+      <button class="close-panel-btn" id="close-panel-btn">✕</button>
+    </div>
+    <div class="panel-search">
+      <input type="text" id="search-input" placeholder="Search days…" autocomplete="off">
+    </div>
+    <div class="panel-list" id="panel-list"></div>
+  </aside>
+
+  <!-- FULL-SCREEN PHOTO VIEWER -->
+  <div class="photo-viewer" id="photo-viewer">
+    <button class="close-photo-btn" id="close-photo-btn">✕</button>
+    <img id="photo-viewer-img" src="" alt="Photo of Matt and Petru">
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('SW registered:', reg.scope))
+          .catch(err => console.log('SW failed:', err));
+      });
+    }
+  </script>
+</body>
+</html>

@@ -222,8 +222,13 @@ document.getElementById('photo-viewer').addEventListener('click', e => {
   }
 });
 
-// ── INIT ──────────────────────────────────────────────────────
+// ── INIT ──────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
-  const startDay = getDayForToday();
+  // Check for #day=N from landing page redirect
+  const hash = window.location.hash;
+  const hashDay = hash.match(/day=(\d+)/);
+  const startDay = hashDay ? parseInt(hashDay[1]) : getDayForToday();
+  // Clear the hash without reload
+  if (hashDay) history.replaceState(null, '', window.location.pathname);
   showDay(startDay, 'next');
 });

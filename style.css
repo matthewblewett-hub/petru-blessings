@@ -90,6 +90,20 @@ html, body {
   font-weight: 500;
   padding: 8px 14px;
 }
+.home-btn {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(201,169,110,0.3);
+  color: var(--gold);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.home-btn:hover { background: rgba(255,255,255,0.22); }
 .menu-btn:hover, .today-btn:hover { background: rgba(255,255,255,0.22); }
 
 /* ─── TODAY PILL ─────────────────────────────────────────────── */

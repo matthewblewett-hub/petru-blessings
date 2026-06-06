@@ -3,85 +3,392 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>A Blessing a Day – For Petru</title>
-  <meta name="description" content="A year of daily blessings for Petru, from Matt with love.">
+  <title>365 Blessings for Petru</title>
+  <meta name="description" content="A year of daily blessings for Petru, from Matty with love.">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Blessings 🌸">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="theme-color" content="#3d1c0e">
+  <meta name="theme-color" content="#1a0505">
   <link rel="manifest" href="manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:   #c9a96e;
+      --gold-lt:#e8d5b0;
+      --rose:   #c8748a;
+      --cream:  #fdf6ef;
+      --ink:    #2c1810;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: #0d0203;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── BACKGROUND ─────────────────────────────────────── */
+    .bg {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 0%,   rgba(120,30,20,0.6) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 100%, rgba(80,15,30,0.5) 0%, transparent 55%),
+        radial-gradient(ellipse at 20% 80%,  rgba(50,10,10,0.4) 0%, transparent 50%),
+        linear-gradient(160deg, #1a0505 0%, #0d0203 50%, #1a0810 100%);
+      z-index: 0;
+    }
+
+    /* Floating particles */
+    .particles {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      animation: float linear infinite;
+      opacity: 0;
+    }
+    @keyframes float {
+      0%   { transform: translateY(100vh) rotate(0deg);  opacity: 0; }
+      5%   { opacity: 1; }
+      95%  { opacity: 0.6; }
+      100% { transform: translateY(-20px) rotate(720deg); opacity: 0; }
+    }
+
+    /* ── MAIN CONTAINER ─────────────────────────────────── */
+    .landing {
+      position: relative;
+      z-index: 10;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      padding-top: max(40px, env(safe-area-inset-top));
+      padding-bottom: max(40px, env(safe-area-inset-bottom));
+      text-align: center;
+      gap: 0;
+    }
+
+    /* ── ICON ───────────────────────────────────────────── */
+    .icon-wrap {
+      position: relative;
+      margin-bottom: 32px;
+      animation: iconIn 1.2s cubic-bezier(0.16,1,0.3,1) 0.3s both;
+    }
+    @keyframes iconIn {
+      from { opacity: 0; transform: scale(0.5) rotate(-10deg); }
+      to   { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+    .icon-img {
+      width: min(160px, 40vw);
+      height: min(160px, 40vw);
+      border-radius: 28%;
+      box-shadow:
+        0 0 60px rgba(201,169,110,0.35),
+        0 0 120px rgba(200,116,138,0.2),
+        0 20px 60px rgba(0,0,0,0.6);
+      animation: iconGlow 4s ease-in-out infinite alternate;
+    }
+    @keyframes iconGlow {
+      from { box-shadow: 0 0 40px rgba(201,169,110,0.3), 0 0 80px rgba(200,116,138,0.15), 0 20px 60px rgba(0,0,0,0.6); }
+      to   { box-shadow: 0 0 80px rgba(201,169,110,0.55), 0 0 160px rgba(200,116,138,0.3), 0 20px 80px rgba(0,0,0,0.7); }
+    }
+
+    /* ── TEXT BLOCK ─────────────────────────────────────── */
+    .text-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      animation: textIn 1.4s cubic-bezier(0.16,1,0.3,1) 0.6s both;
+    }
+    @keyframes textIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .eyebrow {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.8;
+    }
+
+    .title {
+      font-size: clamp(36px, 10vw, 58px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.1;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+    }
+    .title strong {
+      font-weight: 600;
+      font-style: normal;
+      color: var(--gold-lt);
+      display: block;
+    }
+
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 4px 0;
+    }
+
+    .from-line {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.5px;
+    }
+    .from-name {
+      color: var(--rose);
+      font-weight: 500;
+    }
+
+    .subtitle {
+      font-size: clamp(16px, 4.5vw, 22px);
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.75);
+      max-width: 320px;
+      margin-top: 4px;
+    }
+
+    .birthday-line {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(20px, 5vw, 28px);
+      font-weight: 300;
+      letter-spacing: 1px;
+      color: var(--gold);
+      margin-top: 4px;
+    }
+
+    /* ── BUTTON ─────────────────────────────────────────── */
+    .btn-wrap {
+      margin-top: 40px;
+      animation: btnIn 1.6s cubic-bezier(0.16,1,0.3,1) 1.0s both;
+    }
+    @keyframes btnIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .enter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, rgba(201,169,110,0.15), rgba(200,116,138,0.15));
+      border: 1px solid rgba(201,169,110,0.45);
+      color: var(--gold-lt);
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      padding: 16px 36px;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 30px rgba(201,169,110,0.15);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .enter-btn:hover, .enter-btn:active {
+      background: linear-gradient(135deg, rgba(201,169,110,0.28), rgba(200,116,138,0.22));
+      border-color: rgba(201,169,110,0.7);
+      box-shadow: 0 4px 40px rgba(201,169,110,0.3);
+      transform: translateY(-2px);
+    }
+    .enter-btn .arrow {
+      font-size: 18px;
+      transition: transform 0.3s;
+    }
+    .enter-btn:hover .arrow { transform: translateX(4px); }
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    .footer-note {
+      position: fixed;
+      bottom: max(20px, env(safe-area-inset-bottom));
+      left: 0; right: 0;
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.5px;
+      animation: textIn 2s cubic-bezier(0.16,1,0.3,1) 1.5s both;
+    }
+
+    /* ── REDIRECT OVERLAY ───────────────────────────────── */
+    .redirect-overlay {
+      position: fixed;
+      inset: 0;
+      background: #0d0203;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+    }
+    .redirect-overlay.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .redirect-inner {
+      text-align: center;
+      color: var(--gold);
+      font-size: 20px;
+      font-style: italic;
+    }
+    .redirect-inner .day-num {
+      display: block;
+      font-size: 56px;
+      font-weight: 300;
+      line-height: 1;
+      margin-bottom: 8px;
+      color: white;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="app-header" id="app-header">
-    <div class="header-bg"></div>
-    <div class="header-content">
-      <div class="header-top-row">
-        <button class="menu-btn" id="menu-btn" aria-label="View all days">☰</button>
-        <div class="header-title-group">
-          <p class="header-sub">A Blessing a Day</p>
-          <h1 class="header-title">For Petru 🌸</h1>
-        </div>
-        <button class="today-btn" id="go-today-btn" aria-label="Go to today">Today</button>
-      </div>
-    </div>
-  </header>
+  <div class="bg"></div>
+  <div class="particles" id="particles"></div>
 
-  <!-- TODAY PILL -->
-  <div class="today-pill" id="today-pill">
-    <span class="today-dot"></span>
-    <span id="today-pill-text">Day 1</span>
+  <div class="landing">
+
+    <div class="icon-wrap">
+      <img class="icon-img" src="icon-512.png" alt="Blessings">
+    </div>
+
+    <div class="text-block">
+      <p class="eyebrow">A gift of love · 2026</p>
+
+      <h1 class="title">
+        365 Blessings<br>
+        <strong>for Petru</strong>
+      </h1>
+
+      <div class="divider"></div>
+
+      <p class="from-line">from <span class="from-name">Matty</span>, with all my heart</p>
+
+      <p class="subtitle">To the most beautiful wife in the world —</p>
+
+      <p class="birthday-line">🎂 Happy Birthday, my love 🌸</p>
+    </div>
+
+    <div class="btn-wrap">
+      <a class="enter-btn" href="app.html" id="enter-btn">
+        Open Today's Blessing <span class="arrow">→</span>
+      </a>
+    </div>
+
   </div>
 
-  <!-- MAIN CARD AREA -->
-  <main class="card-viewport" id="card-viewport">
-    <div class="card-track" id="card-track">
-      <!-- Cards injected by JS -->
+  <div class="redirect-overlay" id="redirect-overlay">
+    <div class="redirect-inner">
+      <span class="day-num" id="redirect-day">1</span>
+      Opening Day <span id="redirect-day-2">1</span>…
     </div>
-  </main>
-
-  <!-- NAV ARROWS -->
-  <div class="nav-arrows" id="nav-arrows">
-    <button class="nav-arrow" id="prev-btn" aria-label="Previous day">‹</button>
-    <div class="day-counter" id="day-counter">Day 1 of 365</div>
-    <button class="nav-arrow" id="next-btn" aria-label="Next day">›</button>
   </div>
 
-  <!-- ALL-DAYS PANEL -->
-  <div class="panel-overlay" id="panel-overlay"></div>
-  <aside class="days-panel" id="days-panel">
-    <div class="panel-header">
-      <h2>All Blessings</h2>
-      <button class="close-panel-btn" id="close-panel-btn">✕</button>
-    </div>
-    <div class="panel-search">
-      <input type="text" id="search-input" placeholder="Search days…" autocomplete="off">
-    </div>
-    <div class="panel-list" id="panel-list"></div>
-  </aside>
+  <p class="footer-note">Tap anytime to return here · 365 days of blessing</p>
 
-  <!-- FULL-SCREEN PHOTO VIEWER -->
-  <div class="photo-viewer" id="photo-viewer">
-    <button class="close-photo-btn" id="close-photo-btn">✕</button>
-    <img id="photo-viewer-img" src="" alt="Photo of Matt and Petru">
-  </div>
+  <script>
+    // ── Floating particles ────────────────────────────────
+    const particleContainer = document.getElementById('particles');
+    const colors = ['#c9a96e','#e8d5b0','#c8748a','#f0b8c8','#fff5e0'];
+    for (let i = 0; i < 30; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 4 + 1;
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      p.style.cssText = `
+        width: ${size}px; height: ${size}px;
+        background: ${color};
+        left: ${Math.random() * 100}%;
+        animation-duration: ${10 + Math.random() * 20}s;
+        animation-delay: ${Math.random() * 15}s;
+        opacity: 0;
+      `;
+      particleContainer.appendChild(p);
+    }
 
-  <script src="data.js"></script>
-  <script src="script.js"></script>
+    // ── Auto-redirect logic ───────────────────────────────
+    const START_DATE  = new Date('2026-06-07T00:00:00');
+    const LANDING_KEY = 'petru_landing_seen';
+
+    function getDayNum() {
+      const now  = new Date();
+      const diff = Math.floor((now - START_DATE) / 86400000);
+      if (diff < 0)   return 1;
+      if (diff >= 365) return 365;
+      return diff + 1;
+    }
+
+    function goToApp(dayNum) {
+      const overlay = document.getElementById('redirect-overlay');
+      document.getElementById('redirect-day').textContent   = dayNum;
+      document.getElementById('redirect-day-2').textContent = dayNum;
+      overlay.classList.add('show');
+      setTimeout(() => {
+        window.location.href = `app.html#day=${dayNum}`;
+      }, 900);
+    }
+
+    // First-time logic:
+    // - If never visited before → show landing page (set seen flag)
+    // - If visited before and today >= June 7 → auto-redirect to today
+    const alreadySeen = localStorage.getItem(LANDING_KEY);
+    const today = new Date();
+    const birthdayStarted = today >= START_DATE;
+
+    if (!alreadySeen) {
+      // First ever visit — show landing page, mark as seen
+      localStorage.setItem(LANDING_KEY, '1');
+    } else if (birthdayStarted) {
+      // Returning visit on or after birthday — go straight to today
+      goToApp(getDayNum());
+    }
+    // If before birthday and already seen — still show landing page
+
+    // Enter button always goes to today
+    document.getElementById('enter-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      goToApp(getDayNum());
+    });
+  </script>
+
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-          .then(reg => console.log('SW registered:', reg.scope))
-          .catch(err => console.log('SW failed:', err));
+        navigator.serviceWorker.register('./sw.js');
       });
     }
   </script>
+
 </body>
 </html>
