@@ -81,26 +81,22 @@ function buildCard(data) {
   return card;
 }
 
-// ── Render current card ────────────────────────────────────────
+// ── Render current card ─────────────────────────────────────────
 function showDay(dayNum, direction) {
   const track = document.getElementById('card-track');
-  const existing = track.querySelector('.blessing-card.active');
-  const data = DAYS[dayNum - 1];
 
+  // Clear ALL existing cards immediately — prevents stacking
+  track.innerHTML = '';
+
+  const data = DAYS[dayNum - 1];
   const newCard = buildCard(data);
   newCard.classList.add('active');
 
-  if (existing) {
-    const outClass = direction === 'next' ? 'slide-out-left' : 'slide-out-right';
-    const inClass  = direction === 'next' ? 'slide-in-left'  : 'slide-in-right';
-    existing.classList.add(outClass);
-    newCard.classList.add(inClass);
-    existing.addEventListener('animationend', () => existing.remove(), { once: true });
-    track.appendChild(newCard);
-  } else {
-    track.appendChild(newCard);
-  }
+  // Slide in from the correct direction
+  const inClass = direction === 'next' ? 'slide-in-left' : 'slide-in-right';
+  newCard.classList.add(inClass);
 
+  track.appendChild(newCard);
   currentDay = dayNum;
   updateNav();
 }

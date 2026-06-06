@@ -104,7 +104,14 @@ html, body {
   flex-shrink: 0;
 }
 .home-btn:hover { background: rgba(255,255,255,0.22); }
-.menu-btn:hover, .today-btn:hover { background: rgba(255,255,255,0.22); }
+.menu-btn:hover, .today-btn:hover, .home-btn:hover { background: rgba(255,255,255,0.22); }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
 
 /* ─── TODAY PILL ─────────────────────────────────────────────── */
 .today-pill {
