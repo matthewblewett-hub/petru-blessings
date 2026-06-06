@@ -359,23 +359,27 @@
       }, 900);
     }
 
-    // First-time logic:
-    // - If never visited before → show landing page (set seen flag)
-    // - If visited before and today >= June 7 → auto-redirect to today
-    const alreadySeen = localStorage.getItem(LANDING_KEY);
-    const today = new Date();
+    const params = new URLSearchParams(window.location.search);
+    const comingFromApp = params.get('from') === 'app';
+    const alreadySeen   = localStorage.getItem(LANDING_KEY);
+    const today         = new Date();
     const birthdayStarted = today >= START_DATE;
 
     if (!alreadySeen) {
-      // First ever visit — show landing page, mark as seen
+      // Very first visit ever — mark seen, show landing page
       localStorage.setItem(LANDING_KEY, '1');
-    } else if (birthdayStarted) {
-      // Returning visit on or after birthday — go straight to today
+    } else if (!comingFromApp && birthdayStarted) {
+      // Returning visit opened fresh (from home screen icon) → go to today
       goToApp(getDayNum());
     }
-    // If before birthday and already seen — still show landing page
+    // If coming back via 🏠 button (?from=app) → always show landing page
 
-    // Enter button always goes to today
+    // Clean up the URL (remove ?from=app)
+    if (comingFromApp) {
+      history.replaceState(null, '', window.location.pathname);
+    }
+
+    // Enter button always goes to today's blessing
     document.getElementById('enter-btn').addEventListener('click', function(e) {
       e.preventDefault();
       goToApp(getDayNum());
