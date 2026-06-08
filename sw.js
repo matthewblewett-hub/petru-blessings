@@ -1,5 +1,5 @@
 // Service Worker for "A Blessing a Day – For Petru"
-const CACHE_NAME = 'petru-blessings-v1';
+const CACHE_NAME = 'petru-blessings-v3';
 
 // Cache the core app shell on install
 const APP_SHELL = [
