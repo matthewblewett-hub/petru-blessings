@@ -246,7 +246,32 @@ html, body {
   gap: 16px;
   overflow-y: auto;
   flex: 1;
+  position: relative;
 }
+
+/* Text size toggle button — floats top-right of card */
+.text-size-btn {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: var(--cream-dk);
+  border: 1px solid rgba(138,112,96,0.25);
+  border-radius: 20px;
+  color: var(--ink-lt);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
+  z-index: 5;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.text-size-btn:active { transform: scale(0.93); }
+.text-size-btn.size-md { background: #fce4ec; color: var(--rose); border-color: var(--rose-lt); }
+.text-size-btn.size-lg { background: #f8c8d4; color: #8b2e44; border-color: var(--rose); }
 
 /* Section labels */
 .section-label {
@@ -365,11 +390,11 @@ html, body {
   background: linear-gradient(to top, var(--cream) 70%, transparent);
   z-index: 90;
 }
-.nav-centre {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
+.day-counter {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-lt);
+  letter-spacing: 0.3px;
 }
 .nav-arrow {
   width: 48px; height: 48px;
@@ -387,31 +412,6 @@ html, body {
 .nav-arrow:hover { background: var(--cream-dk); transform: scale(1.08); }
 .nav-arrow:active { transform: scale(0.95); }
 .nav-arrow:disabled { opacity: 0.3; pointer-events: none; }
-.day-counter {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--ink-lt);
-  letter-spacing: 0.3px;
-}
-
-/* Text-size toggle button */
-.text-size-btn {
-  background: none;
-  border: 1px solid var(--cream-dk);
-  border-radius: 8px;
-  color: var(--ink-lt);
-  font-family: var(--font-sans);
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 8px;
-  cursor: pointer;
-  letter-spacing: 0.3px;
-  transition: all 0.2s;
-  -webkit-tap-highlight-color: transparent;
-}
-.text-size-btn:hover { background: var(--cream-dk); color: var(--ink-mid); }
-.text-size-btn.size-md { color: var(--rose); border-color: var(--rose-lt); }
-.text-size-btn.size-lg { color: var(--rose); border-color: var(--rose); font-size: 13px; }
 
 /* ─── TEXT SIZE CLASSES (applied to card-body) ───────────────── */
 .card-body.size-md .verse-text,
@@ -436,6 +436,7 @@ html, body {
 .card-body.size-lg .love-label {
   font-size: 15px;
 }
+
 
 /* ─── PANEL OVERLAY & PANEL ──────────────────────────────────── */
 .panel-overlay {

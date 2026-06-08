@@ -44,6 +44,9 @@ function buildCard(data) {
     </div>
     <div class="card-body">
 
+      <!-- Text size toggle -->
+      <button class="text-size-btn" id="text-size-btn" aria-label="Change text size">Aa</button>
+
       <!-- Bible Verse -->
       <div class="verse-block">
         <div class="section-label">
@@ -219,20 +222,18 @@ document.getElementById('photo-viewer').addEventListener('click', e => {
   }
 });
 
-// ── Text size toggle ───────────────────────────────────────────
-const SIZES = ['', 'size-md', 'size-lg']; // normal → medium → large
+// ── Text size toggle (event delegation — button lives inside card) ─
+const SIZES = ['', 'size-md', 'size-lg'];
 const LABELS = ['Aa', 'Aa+', 'AA'];
 let sizeIdx = parseInt(localStorage.getItem('petru_textsize') || '0');
 
 function applyTextSize() {
-  // Apply to currently visible card body
   const body = document.querySelector('.card-body');
   if (body) {
     body.classList.remove('size-md', 'size-lg');
     if (SIZES[sizeIdx]) body.classList.add(SIZES[sizeIdx]);
   }
-  // Update button label + style
-  const btn = document.getElementById('text-size-btn');
+  const btn = document.querySelector('.text-size-btn');
   if (btn) {
     btn.textContent = LABELS[sizeIdx];
     btn.classList.remove('size-md', 'size-lg');
@@ -240,10 +241,13 @@ function applyTextSize() {
   }
 }
 
-document.getElementById('text-size-btn').addEventListener('click', () => {
-  sizeIdx = (sizeIdx + 1) % SIZES.length;
-  localStorage.setItem('petru_textsize', sizeIdx);
-  applyTextSize();
+// Use delegation so it works even after card is rebuilt
+document.addEventListener('click', e => {
+  if (e.target.closest('.text-size-btn')) {
+    sizeIdx = (sizeIdx + 1) % SIZES.length;
+    localStorage.setItem('petru_textsize', sizeIdx);
+    applyTextSize();
+  }
 });
 
 // ── INIT ──────────────────────────────────────────────
