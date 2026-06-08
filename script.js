@@ -99,6 +99,7 @@ function showDay(dayNum, direction) {
   track.appendChild(newCard);
   currentDay = dayNum;
   updateNav();
+  applyTextSize();
 }
 
 function updateNav() {
@@ -218,6 +219,33 @@ document.getElementById('photo-viewer').addEventListener('click', e => {
   }
 });
 
+// ── Text size toggle ───────────────────────────────────────────
+const SIZES = ['', 'size-md', 'size-lg']; // normal → medium → large
+const LABELS = ['Aa', 'Aa+', 'AA'];
+let sizeIdx = parseInt(localStorage.getItem('petru_textsize') || '0');
+
+function applyTextSize() {
+  // Apply to currently visible card body
+  const body = document.querySelector('.card-body');
+  if (body) {
+    body.classList.remove('size-md', 'size-lg');
+    if (SIZES[sizeIdx]) body.classList.add(SIZES[sizeIdx]);
+  }
+  // Update button label + style
+  const btn = document.getElementById('text-size-btn');
+  if (btn) {
+    btn.textContent = LABELS[sizeIdx];
+    btn.classList.remove('size-md', 'size-lg');
+    if (SIZES[sizeIdx]) btn.classList.add(SIZES[sizeIdx]);
+  }
+}
+
+document.getElementById('text-size-btn').addEventListener('click', () => {
+  sizeIdx = (sizeIdx + 1) % SIZES.length;
+  localStorage.setItem('petru_textsize', sizeIdx);
+  applyTextSize();
+});
+
 // ── INIT ──────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
   // Check for #day=N from landing page redirect
@@ -227,4 +255,6 @@ window.addEventListener('DOMContentLoaded', () => {
   // Clear the hash without reload
   if (hashDay) history.replaceState(null, '', window.location.pathname);
   showDay(startDay, 'next');
+  // Apply saved text size
+  applyTextSize();
 });

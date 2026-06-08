@@ -365,6 +365,12 @@ html, body {
   background: linear-gradient(to top, var(--cream) 70%, transparent);
   z-index: 90;
 }
+.nav-centre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
 .nav-arrow {
   width: 48px; height: 48px;
   border-radius: 50%;
@@ -386,6 +392,49 @@ html, body {
   font-weight: 500;
   color: var(--ink-lt);
   letter-spacing: 0.3px;
+}
+
+/* Text-size toggle button */
+.text-size-btn {
+  background: none;
+  border: 1px solid var(--cream-dk);
+  border-radius: 8px;
+  color: var(--ink-lt);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.text-size-btn:hover { background: var(--cream-dk); color: var(--ink-mid); }
+.text-size-btn.size-md { color: var(--rose); border-color: var(--rose-lt); }
+.text-size-btn.size-lg { color: var(--rose); border-color: var(--rose); font-size: 13px; }
+
+/* ─── TEXT SIZE CLASSES (applied to card-body) ───────────────── */
+.card-body.size-md .verse-text,
+.card-body.size-md .message-text,
+.card-body.size-md .love-text {
+  font-size: 19px;
+  line-height: 1.75;
+}
+.card-body.size-md .verse-ref,
+.card-body.size-md .message-source,
+.card-body.size-md .love-label {
+  font-size: 13px;
+}
+.card-body.size-lg .verse-text,
+.card-body.size-lg .message-text,
+.card-body.size-lg .love-text {
+  font-size: 23px;
+  line-height: 1.8;
+}
+.card-body.size-lg .verse-ref,
+.card-body.size-lg .message-source,
+.card-body.size-lg .love-label {
+  font-size: 15px;
 }
 
 /* ─── PANEL OVERLAY & PANEL ──────────────────────────────────── */
